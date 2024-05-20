@@ -10,7 +10,7 @@ REGISTERS = [0 for _ in range(16)]
 # Instruction set
 INSTRUCTIONS = {
 	"EXIT": 255,               # Exit the program
-	"SET": 1,                  # Set a value into a memory address, args: value, addr (size = 3)
+	"PUT": 1,                  # Put a value into a memory address, args: value, addr (size = 3)
 	"LOAD": 2,                 # Load from memory into register, args: src_addr, dst_register (size = 3)
 	"STORE": 3,                # Store from register into memory, args: src_register, dst_addr (size = 3)
 	"ARITHMETIC_PLUS": 4,      # Add from two registers, args: in_reg_0, in_reg_1, out_reg (size = 4)
@@ -29,7 +29,7 @@ INSTRUCTIONS = {
 # Number of arguments for each instruction
 NUM_ARGS = {
 	"EXIT": 0,
-	"SET": 2,
+	"PUT": 2,
 	"LOAD": 2,
 	"STORE": 2,
 	"ARITHMETIC_PLUS": 3,
@@ -62,7 +62,7 @@ def to_instruction_key(value: int | str) -> str:
 	if isinstance(value, str):
 		converted = value.to_upper()
 
-		if converted in ["EXIT", "SET", "LOAD", "STORE"]:
+		if converted in ["EXIT", "PUT", "LOAD", "STORE"]:
 			# No name changes are necessary
 			return converted
 		elif converted == "ADD":
@@ -112,7 +112,7 @@ def execute_instruction(op_code: int, arguments: List[int]):
 	"""
 	global prog_ctr
 
-	if op_code == INSTRUCTIONS["SET"]:
+	if op_code == INSTRUCTIONS["PUT"]:
 		value, addr = arguments
 		MEMORY[addr] = value
 	elif op_code == INSTRUCTIONS["LOAD"]:

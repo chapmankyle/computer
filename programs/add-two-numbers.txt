@@ -1,0 +1,12 @@
+TITLE Add two numbers
+
+PUT 10, 128   # Put value 10 into address 128
+PUT 20, 129   # Put value 20 into address 129
+
+LOAD 128, 0   # Load address 128 into register 0
+LOAD 129, 1   # Load address 129 into register 1
+
+ADD 0, 1, 2   # Add values from registers 0 and 1, putting result into register 2
+STORE 2, 130  # Store value in register 2 into address 130
+
+EXIT 130      # Done
